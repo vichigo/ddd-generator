@@ -1,0 +1,94 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Http\Requests\Admin\Create{{ model }}Request;
+use App\Http\Requests\Admin\Update{{ model }}Request;
+use App\Services\{{ model }}Service;
+
+class {{ class }} extends BackendController
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return mixed
+     */
+    public function index()
+    {
+        return view('admin.{{ model }}.index');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return mixed
+     */
+    public function create()
+    {
+        return view('admin.{{ model }}.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param Create{{ model }}Request $request
+     * @param {{ model }}Service $service
+     * @return mixed
+     */
+    public function store(Create{{ model }}Request $request, {{ model }}Service $service)
+    {
+        $this->response = $service->create($request);
+
+        return $this->responseStatusNotGood() ?
+            back()->withInput()->withErrors($this->response->content['error']) :
+            redirect(route('{{ model }}.index'))->with(['message' => 'Successfully Create {{ model }}.']);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param $id
+     * @param {{ model }}Service $service
+     * @return mixed
+     */
+    public function edit($id, {{ model }}Service $service)
+    {
+        $model = $service->find($id);
+
+        return view('admin.{{ model }}.edit', compact('model', 'id'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Update{{ model }}Request $request
+     * @param $id
+     * @param {{ model }}Service $service
+     * @return mixed
+     */
+    public function update(Update{{ model }}Request $request, $id, {{ model }}Service $service)
+    {
+        $this->response = $service->update($request, $id);
+
+        return $this->responseStatusNotGood() ?
+            back()->withInput()->withErrors($this->response->content['error']) :
+            back()->with(['message' => 'Successfully Update {{ model }}.']);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param $id
+     * @param {{ model }}Service $service
+     * @return mixed
+     */
+    public function destroy($id, {{ model }}Service $service)
+    {
+        $this->response = $service->delete($id);
+
+        return $this->responseStatusNotGood() ?
+            back()->withInput()->withErrors($this->response->content['error']) :
+            redirect(route('{{ model }}.index'))->with(['message' => 'Successfully Delete {{ model }}.']);
+    }
+
+}

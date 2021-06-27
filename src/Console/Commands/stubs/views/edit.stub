@@ -1,0 +1,23 @@
+@extends('admin.layouts.base')
+@section('title')
+    Edit {{ model }}
+@endsection
+@section('breadcrumb-list')
+    <li class="breadcrumb-item"><a href="{{route('{{ modelLower }}.index')}}">{{ model }}</a></li>
+    <li class="breadcrumb-item">Edit</li>
+@endsection
+@section('breadcrumb-actions')
+    <a href="{{route('{{ modelLower }}.index')}}" class="btn btn-sm btn-primary">Back</a>
+    <button onclick="$('#{{ model }}Form').submit()" class="btn btn-sm btn-success">Create</button>
+@endsection
+<x-content-wrapper>
+<form id="{{ model }}Form" method="POST" action="{{route('{{ modelLower }}.update', $id)}}">
+    @csrf
+    @method('PUT')
+    @include('admin.{{ model }}.partial')
+</form>
+</x-content-wrapper>
+
+@push('javascript')
+    {!! JsValidator::formRequest('App\Http\Requests\Admin\Update{{ model }}Request') !!}
+@endpush

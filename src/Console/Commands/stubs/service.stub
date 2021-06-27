@@ -1,0 +1,39 @@
+<?php
+
+
+namespace {{ namespace }};
+
+use App\Abstractions\ModelAbstraction;
+use App\Interfaces\{{ class }}Interface;
+use Illuminate\Http\Request;
+use App\Models\{{ model }};
+
+class {{ class }} extends ModelAbstraction implements {{ class }}Interface
+{
+
+    protected {{ model }} $model;
+
+    public function __construct({{ model }} $model)
+    {
+        $this->model = $model;
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function create(Request $request)
+    {
+        dd($request->all(), 'Continue write code create {{ model }}.');
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return mixed
+     */
+    public function update(Request $request, $id)
+    {
+        dd($request->all(), 'Continue write code update {{ model }}.');
+    }
+}

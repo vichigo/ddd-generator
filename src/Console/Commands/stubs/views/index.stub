@@ -1,0 +1,48 @@
+@extends('admin.layouts.base')
+@section('title')
+    {{ model }}
+@endsection
+@section('breadcrumb-list')
+    <li class="breadcrumb-item">{{ model }}</li>
+@endsection
+@section('breadcrumb-actions')
+    <a href="{{route('{{ modelLower }}.create')}}" class="btn btn-sm btn-success">Create</a>
+@endsection
+@section('content')
+    <div class="container-fluid">
+        <div class="fade-in">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-responsive-sm table-bordered table-striped table-sm" id="dataTable">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@push('javascript')
+    <script>
+        $(function() {
+            $('#dataTable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{!! route('{{ model }}.data') !!}',
+                columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'name', name: 'name' },
+                ]
+            });
+        });
+    </script>
+@endpush
