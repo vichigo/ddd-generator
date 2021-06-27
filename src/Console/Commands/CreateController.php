@@ -12,7 +12,7 @@ class CreateController extends GeneratorCommand
      *
      * @var string
      */
-    protected $signature = 'make:customController {name} {model}';
+    protected $signature = 'DataController {name} {model}';
 
     /**
      * The console command description.
