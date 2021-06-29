@@ -1,11 +1,11 @@
 <?php
 
-namespace Vichigo\DDDGenerator\Console\Commands;
+namespace Vichigo\DDDGenerator\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
-class CreateDataController extends GeneratorCommand
+class CreateController extends GeneratorCommand
 {
     /**
      * The name and signature of the console command.
@@ -28,7 +28,7 @@ class CreateDataController extends GeneratorCommand
      */
     protected function getStub(): string
     {
-        return $this->resolveStubPath('/stubs/data.stub');
+        return $this->resolveStubPath('/stubs/controller.stub');
     }
 
     /**
@@ -50,7 +50,7 @@ class CreateDataController extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace . '\Http\Controllers\Data';
+        return $rootNamespace . '\Http\Controllers\Admin';
     }
 
 
@@ -82,8 +82,7 @@ class CreateDataController extends GeneratorCommand
     protected function buildModelReplacements(array $replace): array
     {
         return array_merge($replace, [
-            '{{ model }}' => class_basename($this->argument('model')),
-            '{{ modelLower }}' =>  strtolower($this->argument('model'))
+            '{{ model }}' => class_basename($this->argument('model'))
         ]);
     }
 }

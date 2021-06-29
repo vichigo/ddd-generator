@@ -1,6 +1,6 @@
 <?php
 
-namespace Vichigo\DDDGenerator\Console\Commands;
+namespace Vichigo\DDDGenerator\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;

@@ -3,7 +3,7 @@
 namespace Vichigo\DDDGenerator;
 
 use Illuminate\Support\ServiceProvider;
-use Vichigo\DDDGenerator\Console\Commands\CreateDataController;
+use Vichigo\DDDGenerator\Commands\CreateDataController;
 
 class DDDGeneratorServiceProvider extends ServiceProvider
 {

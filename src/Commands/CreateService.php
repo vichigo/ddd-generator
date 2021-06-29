@@ -1,25 +1,24 @@
 <?php
 
-namespace Vichigo\DDDGenerator\Console\Commands;
+namespace Vichigo\DDDGenerator\Commands;
 
 use Illuminate\Console\GeneratorCommand;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
-class CreateController extends GeneratorCommand
+class CreateService extends GeneratorCommand
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'DataController {name} {model}';
+    protected $signature = 'make:service {name} {model}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command create controller';
+    protected $description = 'Command create service';
 
     /**
      * Get the stub file for the generator.
@@ -28,7 +27,7 @@ class CreateController extends GeneratorCommand
      */
     protected function getStub(): string
     {
-        return $this->resolveStubPath('/stubs/controller.stub');
+        return $this->resolveStubPath('/stubs/service.stub');
     }
 
     /**
@@ -50,9 +49,8 @@ class CreateController extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace . '\Http\Controllers\Admin';
+        return $rootNamespace . '\Services';
     }
-
 
     /**
      * Build the class with the given name.
@@ -61,7 +59,7 @@ class CreateController extends GeneratorCommand
      *
      * @param string $name
      * @return string
-     * @throws FileNotFoundException
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     protected function buildClass($name)
     {

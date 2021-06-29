@@ -1,24 +1,25 @@
 <?php
 
-namespace Vichigo\DDDGenerator\Console\Commands;
+namespace Vichigo\DDDGenerator\Commands;
 
 use Illuminate\Console\GeneratorCommand;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
-class CreateService extends GeneratorCommand
+class CreateDataController extends GeneratorCommand
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'make:service {name} {model}';
+    protected $signature = 'DataController {name} {model}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command create service';
+    protected $description = 'Command create controller';
 
     /**
      * Get the stub file for the generator.
@@ -27,7 +28,7 @@ class CreateService extends GeneratorCommand
      */
     protected function getStub(): string
     {
-        return $this->resolveStubPath('/stubs/service.stub');
+        return $this->resolveStubPath('/stubs/data.stub');
     }
 
     /**
@@ -49,8 +50,9 @@ class CreateService extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace . '\Services';
+        return $rootNamespace . '\Http\Controllers\Data';
     }
+
 
     /**
      * Build the class with the given name.
@@ -59,7 +61,7 @@ class CreateService extends GeneratorCommand
      *
      * @param string $name
      * @return string
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws FileNotFoundException
      */
     protected function buildClass($name)
     {
@@ -80,7 +82,8 @@ class CreateService extends GeneratorCommand
     protected function buildModelReplacements(array $replace): array
     {
         return array_merge($replace, [
-            '{{ model }}' => class_basename($this->argument('model'))
+            '{{ model }}' => class_basename($this->argument('model')),
+            '{{ modelLower }}' =>  strtolower($this->argument('model'))
         ]);
     }
 }

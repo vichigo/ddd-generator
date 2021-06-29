@@ -15,12 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Vichigo\\DDDGenerator\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Vichigo\\DDDGenerator\\Tests\\": "tests"
+            "Vichigo\\DDDGenerator\\": "src/"
         }
     },
     "extra": {
